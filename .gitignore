@@ -12,3 +12,6 @@ Desktop.ini
 # IDE
 .idea/
 .vscode/
+
+# Project-local Codex guidance (keep out of GitHub)
+/AGENTS.md

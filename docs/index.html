@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#078fd3">
+  <title>Учет оборудования · Город-отель «Бархатные сезоны»</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <svg class="icon-library" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="m12 3 8.5 4.5v9L12 21l-8.5-4.5v-9L12 3Z"/><path d="m3.8 7.6 8.2 4.5 8.2-4.5M12 12v8.5M8 5.2l8.4 4.6"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M4 12.5 9.2 18 20 6"/><path d="M20 12a8 8 0 1 1-4.2-7.1"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22V5.5Z"/><path d="M4 6v16M8 7h8M8 11h8"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-1.5a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4V21"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-1.5a4 4 0 0 0-3-3.9M16 3.2a4 4 0 0 1 0 7.6"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3V6Z"/><path d="M9 3v15M15 6v15"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 20h16"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 6h16M7 12h10m-7 6h4"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="m14 5 5 5M4 20l4.5-1 10.8-10.8a2.1 2.1 0 0 0-3-3L5.5 16 4 20Z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="m16 3 5 5-4 1-4 4-1 6-2-2-2 4-1-1 4-4-2-2 6-1 4-4 1-4Z"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4m-5 5 5-5 5 5M4 20h16"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 4.5 2.6 18a2 2 0 0 0 1.7 3h15.4a2 2 0 0 0 1.7-3L13.7 4.5a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4m0 4h.01"/></symbol>
+    <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/></symbol>
+    <symbol id="i-laptop" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="12" rx="1.5"/><path d="M2 20h20l-2-4H4l-2 4Z"/></symbol>
+    <symbol id="i-router" viewBox="0 0 24 24"><rect x="3" y="9" width="18" height="10" rx="2"/><path d="M7 9V5m10 4V5M8 14h.01M12 14h.01M16 14h.01"/></symbol>
+    <symbol id="i-printer" viewBox="0 0 24 24"><path d="M6 8V3h12v5M6 17H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v7H6zM18 11h.01"/></symbol>
+  </svg>
+
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Учет оборудования · Главная"><img src="./assets/hotel-logo.png" alt="Город-отель «Бархатные сезоны»"></a>
+      <div class="topbar-actions">
+        <label class="top-search"><svg><use href="#i-search"/></svg><input id="global-search" placeholder="Поиск оборудования" autocomplete="off"></label>
+        <button class="icon-button notification-button" aria-label="Уведомления" data-action="notifications"><svg><use href="#i-bell"/></svg><i></i></button>
+        <div class="role-switch" id="role-switch">
+          <button class="profile-button" id="profile-button" aria-expanded="false"><span class="avatar" id="profile-avatar">АС</span><span class="profile-copy"><strong id="profile-name">Анна Соколова</strong><small id="profile-role">МОЛ · ИТ-отдел</small></span><svg><use href="#i-chevron-down"/></svg></button>
+          <div class="profile-menu" id="profile-menu">
+            <div class="profile-menu-title">Пользователь</div>
+            <button data-role="mol"><span class="avatar avatar-small">АС</span><span><strong>Анна Соколова</strong><small>МОЛ · ИТ-отдел</small></span><span class="role-check" id="check-mol">✓</span></button>
+            <button data-role="manager"><span class="avatar avatar-small manager-avatar">МИ</span><span><strong>Марина Ильина</strong><small>Руководство</small></span><span class="role-check" id="check-manager"></span></button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <nav class="site-nav" aria-label="Главная навигация"><div class="nav-inner">
+      <button class="nav-link active" data-view="overview"><svg><use href="#i-grid"/></svg><span>Обзор</span></button>
+      <button class="nav-link" data-view="equipment"><svg><use href="#i-box"/></svg><span>Оборудование</span><b class="nav-count" id="nav-equipment-count">0</b></button>
+      <button class="nav-link" data-view="components"><svg><use href="#i-layers"/></svg><span>Комплектующие</span></button>
+      <button class="nav-link" data-view="history"><svg><use href="#i-clock"/></svg><span>История</span></button>
+      <button class="nav-link" data-view="audits"><svg><use href="#i-check"/></svg><span>Инвентаризации</span></button>
+      <button class="nav-link" data-view="directories"><svg><use href="#i-users"/></svg><span>Сотрудники</span></button>
+      <button class="nav-link" data-view="locations"><svg><use href="#i-map"/></svg><span>Локации</span></button>
+      <button class="nav-link" data-view="catalogs"><svg><use href="#i-book"/></svg><span>Справочники</span></button>
+      <button class="nav-link" data-view="import"><svg><use href="#i-upload"/></svg><span>Импорт</span></button>
+    </div></nav>
+    <main class="main-area">
+      <div class="mobile-role"><span class="mobile-role-dot"></span><span id="mobile-role-label">Вы вошли как МОЛ</span><button id="mobile-role-action" data-action="switch-role">Сменить</button></div>
+      <div class="content" id="content" aria-live="polite"></div>
+      <footer class="app-footer"><span>Учет оборудования</span><span>Город-отель «Бархатные сезоны»</span><span>© <span id="footer-year"></span></span></footer>
+    </main>
+  </div>
+
+  <div class="modal-layer" id="modal-layer" aria-hidden="true"><div class="modal-backdrop" data-action="close-modal"></div><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><header class="modal-header"><div><span class="eyebrow" id="modal-eyebrow">Операция</span><h2 id="modal-title">Добавить оборудование</h2></div><button class="icon-button" data-action="close-modal" aria-label="Закрыть"><svg><use href="#i-close"/></svg></button></header><div class="modal-body" id="modal-body"></div></section></div>
+  <aside class="detail-panel" id="detail-panel" aria-hidden="true"><div class="detail-scrim" data-action="close-detail"></div><div class="detail-drawer" id="detail-drawer"></div></aside>
+  <div class="toast-region" id="toast-region" aria-live="polite"></div>
+  <script src="./app.js"></script>
+</body>
+</html>
