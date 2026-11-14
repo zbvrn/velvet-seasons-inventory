@@ -1,98 +1,108 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Бэкенд
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+API системы материального учёта оборудования для города-отеля «Бархатные сезоны».
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Стек: TypeScript, NestJS 11, TypeORM 0.3, MariaDB. Код разделён на модули; обработка HTTP-запросов, логика приложения и доступ к данным находятся в отдельных классах.
 
-## Description
+## API
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+| Метод | Путь                  | Описание                                                |
+| ----- | --------------------- | ------------------------------------------------------- |
+| GET   | /info                 | Название приложения и статус                            |
+| GET   | /technical-conditions | Справочник технических состояний, отсортированный по ID |
 
-## Project setup
+Запись справочника содержит поля id, code, name и isActive. Идентификаторы возвращаются строками, признак активности — числом 0 или 1. В ответ входят все записи справочника.
 
-```bash
-$ npm install
-```
+API находится на начальном этапе разработки. Авторизация и операции изменения данных пока не реализованы. [Макет интерфейса](../docs/README.md) работает отдельно.
 
-## Compile and run the project
+## Требования
 
-```bash
-# development
-$ npm run start
+- Node.js 22 и npm.
+- MariaDB 10.6 или новее.
 
-# watch mode
-$ npm run start:dev
+Локально приложение проверено с Node.js 22.14.0, npm 10.9.2 и MariaDB 12.3.3.
 
-# production mode
-$ npm run start:prod
-```
+## Подготовка базы данных
 
-## Run tests
+Для первичного создания базы выполнить SQL-скрипты через административное соединение в следующем порядке:
 
-```bash
-# unit tests
-$ npm run test
+1. [01_create_schema.sql](../database/01_create_schema.sql)
+2. [02_status_dictionaries.sql](../database/02_status_dictionaries.sql)
+3. [03_integrity_and_mol.sql](../database/03_integrity_and_mol.sql)
 
-# e2e tests
-$ npm run test:e2e
+Скрипты создают базу velvet_inventory и последовательно обновляют её схему. Они рассчитаны на однократное применение. Перед изменением существующей базы необходимо проверить её состояние и сделать резервную копию: DDL-команды MariaDB не гарантируют откат всего скрипта.
 
-# test coverage
-$ npm run test:cov
-```
+Для приложения нужна отдельная учётная запись MariaDB. Текущим маршрутам достаточно права SELECT на velvet_inventory.*.
 
-## Deployment
+## Запуск
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+Команды выполняются из папки backend. В PowerShell вместо npm можно использовать npm.cmd.
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+Установить зависимости:
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
+    npm ci
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Скопировать .env.example в .env и заполнить параметры:
 
-## Resources
+| Переменная  | Назначение                           |
+| ----------- | ------------------------------------ |
+| PORT        | Порт HTTP-сервера, по умолчанию 3000 |
+| DB_HOST     | Адрес MariaDB                        |
+| DB_PORT     | Порт MariaDB                         |
+| DB_DATABASE | Имя базы данных                      |
+| DB_USERNAME | Пользователь MariaDB                 |
+| DB_PASSWORD | Пароль пользователя                  |
 
-Check out a few resources that may come in handy when working with NestJS:
+Запустить сервер в режиме разработки:
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+    npm run start:dev
 
-## Support
+При PORT=3000 API доступен по адресам:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- http://127.0.0.1:3000/info
+- http://127.0.0.1:3000/technical-conditions
 
-## Stay in touch
+Сервер принимает подключения на 127.0.0.1. После изменения .env требуется перезапуск.
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Параметры TypeORM находятся в [database.module.ts](src/database/database.module.ts). Автоматическая синхронизация схемы и запуск миграций отключены.
 
-## License
+## Тесты
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+| Команда                         | Проверка                                                         |
+| ------------------------------- | ---------------------------------------------------------------- |
+| npm test -- --runInBand         | Тест контроллера                                                 |
+| npm run test:e2e -- --runInBand | HTTP-маршруты; репозиторий справочника заменён тестовым объектом |
+| npm run test:integration        | Чтение справочника из тестовой MariaDB                           |
+
+Для первых двух команд база данных не требуется.
+
+### Интеграционный тест
+
+Тест использует отдельную базу velvet_inventory_test с таблицей technical_condition и тремя фиксированными записями.
+
+Подготовка:
+
+1. Создать технического пользователя velvet_app с хостом 127.0.0.1, если он ещё не создан.
+2. Один раз выполнить [скрипт подготовки тестовой базы](../database/testing/01_prepare_technical_conditional_test.sql) через административное соединение. Он создаёт базу, таблицу, записи и выдаёт пользователю право чтения.
+3. Скопировать .env.test.example в .env.test и заполнить пароль.
+4. Запустить службу MariaDB и выполнить npm run test:integration.
+
+Тест проверяет поля записей, строковый тип ID и порядок результатов. Во время проверки данные не изменяются. Подключение разрешено только к velvet_inventory_test на 127.0.0.1.
+
+### Сборка и проверка кода
+
+    npm run build
+    npm run lint
+    npm run format
+
+Сборка создаёт JavaScript в папке dist. Линтер проверяет код и применяет автоматические исправления; format форматирует исходники и тесты через Prettier.
+
+## Структура
+
+| Каталог                  | Содержимое                                |
+| ------------------------ | ----------------------------------------- |
+| src/database             | Подключение к MariaDB                     |
+| src/technical-conditions | Сущность, сервис и контроллер справочника |
+| test                     | HTTP- и интеграционные тесты              |
+
+Локальные настройки .env и .env.test исключены из Git. В репозитории хранятся примеры настроек без паролей и lock-файл зависимостей.
