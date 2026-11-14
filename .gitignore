@@ -15,3 +15,20 @@ Desktop.ini
 
 # Project-local Codex guidance (keep out of GitHub)
 /AGENTS.md
+
+# Node.js dependencies
+node_modules/
+
+# Backend build and test output
+/backend/dist/
+/backend/coverage/
+*.tsbuildinfo
+
+# Local environment settings
+.env
+.env.*
+!.env.example
+!.env.test.example
+
+# Logs
+*.log
